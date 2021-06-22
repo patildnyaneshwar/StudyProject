@@ -23,7 +23,6 @@ open class BaseActivity : AppCompatActivity() {
 
         networkCallback().observe(this, {
             Log.d(TAG, "onCreate:networkCallback $it")
-
             if (it) {
                 showToast(getString(R.string.back_online))
             } else {
