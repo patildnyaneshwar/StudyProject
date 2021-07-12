@@ -5,12 +5,13 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import android.os.Build
-import android.os.Handler
-import android.os.Looper
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.project.study.data.model.Urls
 
 val _networkReturn: MutableLiveData<Boolean> by lazy { MutableLiveData() }
 val networkBuilder = NetworkRequest.Builder()
@@ -37,3 +38,13 @@ fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()
 }
 
+inline fun <reified T : Any> T.objectToString(): String = Gson().toJson(this, T::class.java)
+inline fun <reified T : Any> String.stringToObject(): T = Gson().fromJson(this, T::class.java)
+
+//fun <T> stringToObject(value: String, objectClass: Class<T>): T {
+//    return Gson().fromJson(value, objectClass)
+//}
+//
+//fun <T> objectToString(cls: Class<T>, obj: Any): String {
+//    return Gson().toJson(cls, obj::class.java)
+//}

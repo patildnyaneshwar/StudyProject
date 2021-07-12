@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/jobsFragment">
+    app:startDestination="@id/photosFragment">
     <fragment
-        android:id="@+id/jobsFragment"
-        android:name="com.project.study.ui.JobsFragment"
-        android:label="fragment_jobs"
-        tools:layout="@layout/fragment_jobs" >
+        android:id="@+id/photosFragment"
+        android:name="com.project.study.ui.photos.PhotosFragment"
+        android:label="fragment_photos"
+        tools:layout="@layout/fragment_photos" >
         <action
             android:id="@+id/action_jobsFragment_to_jobsDetailsFragment"
-            app:destination="@id/jobsDetailsFragment" />
+            app:destination="@id/photosDetailsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/jobsDetailsFragment"
-        android:name="com.project.study.ui.JobsDetailsFragment"
-        android:label="fragment_jobs_details"
-        tools:layout="@layout/fragment_jobs_details" />
+        android:id="@+id/photosDetailsFragment"
+        android:name="com.project.study.ui.photos_details.PhotosDetailsFragment"
+        android:label="fragment_photos_details"
+        tools:layout="@layout/fragment_photos_details" />
 </navigation>

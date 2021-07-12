@@ -10,11 +10,15 @@ import com.project.study.R
 import com.project.study.databinding.ActivityBaseBinding
 import com.project.study.utils.networkCallback
 import com.project.study.utils.showToast
+import dagger.hilt.android.AndroidEntryPoint
 
-private const val TAG = "BaseActivity"
-
+@AndroidEntryPoint
 open class BaseActivity : AppCompatActivity() {
 
+    companion object {
+        private const val TAG = "BaseActivity"
+        public var isNetworkAvail = true
+    }
     lateinit var binding: ActivityBaseBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
