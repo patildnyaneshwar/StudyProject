@@ -17,7 +17,6 @@ open class BaseActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "BaseActivity"
-        public var isNetworkAvail = true
     }
     lateinit var binding: ActivityBaseBinding
 

@@ -16,6 +16,14 @@ import com.project.study.data.model.Urls
 import com.project.study.databinding.ItemPhotosBinding
 import org.jetbrains.annotations.NotNull
 
+/**
+ * This is same has using ListAdapter,
+ * Because internally ListAdapter uses {@link AsyncListDiffer}
+ * <p>
+ * For simplicity, the {@link ListAdapter} wrapper class can often be used instead of the
+ * AsyncListDiffer directly.
+ * <p>
+ * */
 class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.PhotosViewHolder>() {
     private val TAG = "PhotosAdapter"
 
@@ -32,11 +40,20 @@ class PhotosAdapter : RecyclerView.Adapter<PhotosAdapter.PhotosViewHolder>() {
         }
     }
 
+    /**
+     * {@link AsyncListDiffer} is helper for computing the difference between two lists
+     * via {@link DiffUtil} on a background thread.
+     * <p>
+     * It can be connected to a {@link RecyclerView.Adapter}, and will signal the
+     * adapter of changes between sumbitted lists.
+     * <p>
+     * */
     private val differ = AsyncListDiffer(this, diffCallback)
 
     fun submitList(list: List<PhotosTable>?) = differ.submitList(list)
 
-    inner class PhotosViewHolder(@NotNull val binding: ItemPhotosBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class PhotosViewHolder(@NotNull val binding: ItemPhotosBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(photos: PhotosTable) {
             Log.d(TAG, "bind:photos ${photos.urls}")
             binding.setVariable(BR.photos, photos)

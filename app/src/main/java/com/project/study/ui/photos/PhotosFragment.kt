@@ -22,7 +22,8 @@ class PhotosFragment : Fragment() {
     private val TAG = "PhotosFragment"
     private lateinit var binding: FragmentPhotosBinding
     private val viewModel: SharedViewModel by viewModels()
-    private lateinit var photoAdapter: PhotosAdapter
+//    private lateinit var photoAdapter: PhotosAdapter
+    private lateinit var photosListAdapter: PhotosListAdapter
     var isLastPage: Boolean = false
     var isLoading: Boolean = false
 
@@ -39,7 +40,9 @@ class PhotosFragment : Fragment() {
         binding = FragmentPhotosBinding.bind(view)
         binding.viewModel = viewModel
 
-        photoAdapter = PhotosAdapter()
+//        photoAdapter = PhotosAdapter()
+        photosListAdapter = PhotosListAdapter()
+
         val layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerView.layoutManager = layoutManager
         binding.recyclerView.addOnScrollListener(object :PaginationScrollListener(layoutManager){
@@ -58,7 +61,7 @@ class PhotosFragment : Fragment() {
             }
 
         })
-        binding.recyclerView.adapter = photoAdapter
+        binding.recyclerView.adapter = photosListAdapter
 
         setUpObservers()
     }
@@ -70,7 +73,8 @@ class PhotosFragment : Fragment() {
                     events.data.let { list ->
                         Log.d(TAG, "photosList Size: ${list?.size}")
                         isLoading = false
-                        photoAdapter.submitList(list)
+//                        photoAdapter.submitList(list)
+                        photosListAdapter.submitList(list)
                     }
                 }
                 Status.ERROR -> {
