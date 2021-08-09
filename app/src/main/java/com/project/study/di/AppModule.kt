@@ -1,6 +1,7 @@
 package com.project.study.di
 
 import android.app.Application
+import android.content.Context
 import androidx.room.Room
 import com.project.study.BuildConfig
 import com.project.study.data.client.RetrofitDataService
@@ -9,6 +10,7 @@ import com.project.study.utils.ConstantUrls
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,6 +21,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+//    @Provides
+//    @Singleton
+//    fun provideApplicationContext(
+//        application: Application
+//    ): Context? = application.applicationContext
 
     @Provides
     @Singleton
@@ -38,7 +46,7 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideOkHttpClient() = if (BuildConfig.DEBUG) {
+    fun provideOkHttpClient(): OkHttpClient = if (BuildConfig.DEBUG) {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
         OkHttpClient.Builder()
