@@ -1,19 +1,15 @@
 package com.project.study.viewmodel
 
-import android.content.Context
 import androidx.databinding.ObservableField
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.project.study.R
-import com.project.study.data.database.PhotosDao
 import com.project.study.data.database.tables.PhotosTable
 import com.project.study.data.repository.PhotosRepository
 import com.project.study.data.client.ResponseEvent
 import com.project.study.data.client.ResponseService
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,25 +17,23 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
-    @ApplicationContext private val context: Context,
-    private val photosRepository: PhotosRepository,
-    private val photosDao: PhotosDao
+    private val photosRepository: PhotosRepository
 ) : ViewModel(), ResponseService {
     private val TAG = "SharedViewModel"
 
     val loading: ObservableField<Boolean> by lazy { ObservableField<Boolean>(false) }
     private val _photosData = MutableLiveData<ResponseEvent<List<PhotosTable>>>()
-    private val photosList: MutableList<PhotosTable> = ArrayList()
+    private val photosList: ArrayList<PhotosTable> = ArrayList()
     var pageNo = 1
 
-    init {
-        if (_photosData.value == null)
-            insertPhotos(pageNo)
-    }
+//    init {
+//        if (_photosData.value == null)
+//            insertPhotos(pageNo)
+//    }
 
-    fun insertPhotos(pageNo: Int) = viewModelScope.launch {
+    fun insertPhotos(key: String, pageNo: Int) = viewModelScope.launch {
         photosRepository.getPhotos(
-            context.resources.getString(R.string.access_key),
+            key,
             pageNo,
             this@SharedViewModel
         )
@@ -47,7 +41,7 @@ class SharedViewModel @Inject constructor(
 
     fun getPhotos(): LiveData<ResponseEvent<List<PhotosTable>>> {
         viewModelScope.launch {
-            photosDao.getAllPhotos().catch {
+            photosRepository.getAllPhotos().catch {
                 _photosData.postValue(ResponseEvent.error("Something went wrong!", null))
             }.collect { list ->
                 photosList.addAll(list)
@@ -64,8 +58,8 @@ class SharedViewModel @Inject constructor(
 
     override fun <D> success(data: D) {
         viewModelScope.launch {
-            photosDao.deleteAllPhotos()
-            photosDao.insertAllPhotos(data as MutableList<PhotosTable>)
+            photosRepository.deleteAllPhotos()
+            photosRepository.insertAllPhotos(data)
         }
     }
 

@@ -57,7 +57,7 @@ class PhotosFragment : Fragment() {
             override fun loadMoreItems() {
                 Log.d(TAG, "loadMoreItems: ")
                 isLoading = true
-                viewModel.insertPhotos(++viewModel.pageNo)
+                viewModel.insertPhotos(resources.getString(R.string.access_key), ++viewModel.pageNo)
             }
 
         })
@@ -67,6 +67,7 @@ class PhotosFragment : Fragment() {
     }
 
     private fun setUpObservers() {
+        viewModel.insertPhotos(resources.getString(R.string.access_key), viewModel.pageNo)
         viewModel.getPhotos().observe(viewLifecycleOwner, {events->
             when (events.status) {
                 Status.SUCCESS -> {
