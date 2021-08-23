@@ -16,6 +16,7 @@
         <ImageView
             android:id="@+id/iv_photo"
             imageSrc="@{photos.urls}"
+            placeholder="@{@drawable/loading_anim}"
             android:layout_width="0dp"
             android:layout_height="@dimen/_192sdp"
             android:scaleType="centerCrop"
