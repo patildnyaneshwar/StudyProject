@@ -17,3 +17,4 @@ Photography App uses the [Unsplash API](https://unsplash.com/developers) for the
 - [Navigation Components](https://developer.android.com/guide/navigation/navigation-getting-started) - Navigate between screens
 - [ViewModel-LiveData](https://developer.android.com/topic/libraries/architecture/viewmodel) - LiveData object that updates the UI from ViewModel object
 - [Coroutines](https://developer.android.com/kotlin/coroutines) - Executes asynchronously in background
+- [Espresso](https://developer.android.com/training/testing/ui-testing/espresso-testing) - UI testing
