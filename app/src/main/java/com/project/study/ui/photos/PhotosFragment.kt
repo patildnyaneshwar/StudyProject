@@ -9,15 +9,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.project.study.R
+import com.project.study.data.client.Status
+import com.project.study.data.database.tables.PhotosTable
 import com.project.study.databinding.FragmentPhotosBinding
 import com.project.study.utils.PaginationScrollListener
-import com.project.study.data.client.Status
 import com.project.study.utils.showToast
 import com.project.study.viewmodel.SharedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PhotosFragment : Fragment() {
+class PhotosFragment : Fragment(), PhotosListAdapter.OnItemClickListener {
 
     private val TAG = "PhotosFragment"
     private lateinit var binding: FragmentPhotosBinding
@@ -41,7 +42,7 @@ class PhotosFragment : Fragment() {
         binding.viewModel = viewModel
 
 //        photoAdapter = PhotosAdapter()
-        photosListAdapter = PhotosListAdapter()
+        photosListAdapter = PhotosListAdapter(this)
 
         val layoutManager = GridLayoutManager(requireContext(), 3)
         binding.recyclerView.layoutManager = layoutManager
@@ -83,6 +84,10 @@ class PhotosFragment : Fragment() {
                 }
             }
         })
+    }
+
+    override fun onItemClick(photos: PhotosTable) {
+        requireActivity().showToast(requireActivity().resources.getString(R.string.item_clicked))
     }
 
 }

@@ -15,12 +15,23 @@ import org.jetbrains.annotations.NotNull
 /**
  * @see PhotosAdapter for some info
  * */
-class PhotosListAdapter : ListAdapter<PhotosTable, PhotosListAdapter.PhotosViewHolder>(DiffCallback<PhotosTable>()) {
+class PhotosListAdapter(
+    val onItemClickListener: OnItemClickListener
+) : ListAdapter<PhotosTable, PhotosListAdapter.PhotosViewHolder>(DiffCallback<PhotosTable>()) {
+
+    interface OnItemClickListener {
+        fun onItemClick(photos: PhotosTable)
+    }
 
     inner class PhotosViewHolder(@NotNull val binding: ItemPhotosBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(photos: PhotosTable) {
             binding.setVariable(BR.photos, photos)
+            binding.root.rootView.setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    onItemClickListener.onItemClick(photos)
+                }
+            }
         }
     }
 

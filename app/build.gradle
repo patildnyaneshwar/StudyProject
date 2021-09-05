@@ -61,7 +61,11 @@ dependencies {
     androidTestImplementation "junit:junit:$junit_version"
     androidTestImplementation "com.google.truth:truth:$truth_version"
     androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
+    androidTestImplementation "androidx.test:runner:$test_runner_rules_version"
+    androidTestImplementation "androidx.test:rules:$test_runner_rules_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espresso_version"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espresso_version"
     androidTestImplementation("androidx.navigation:navigation-testing:$nav_version")
     androidTestImplementation "com.google.dagger:hilt-android-testing:$dagger_hilt_version"
     kaptAndroidTest "com.google.dagger:hilt-compiler:$dagger_hilt_version"
