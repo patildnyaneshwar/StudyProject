@@ -6,6 +6,8 @@ import com.project.study.data.database.tables.PhotosTable
 import com.project.study.data.model.PhotosDataClass
 import com.project.study.data.client.ResponseService
 import com.project.study.data.database.PhotosDao
+import com.project.study.data.model.Links
+import com.project.study.data.model.Urls
 import com.project.study.utils.objectToString
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Call

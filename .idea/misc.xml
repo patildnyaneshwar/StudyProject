@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/IWizard/AndroidStudio/workspace/StudyProject/app/src/main/res/drawable/loading_img.xml" value="0.16875" />
+        <entry key="..\:/Users/IWizard/AndroidStudio/workspace/StudyProject/app/src/main/res/layout/fragment_form.xml" value="0.15260416666666668" />
         <entry key="..\:/Users/IWizard/AndroidStudio/workspace/StudyProject/app/src/main/res/layout/fragment_photos.xml" value="0.1" />
         <entry key="..\:/Users/IWizard/AndroidStudio/workspace/StudyProject/app/src/main/res/layout/fragment_photos_details.xml" value="0.1" />
         <entry key="..\:/Users/IWizard/AndroidStudio/workspace/StudyProject/app/src/main/res/layout/item_photos.xml" value="0.1" />

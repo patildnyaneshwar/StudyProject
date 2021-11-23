@@ -15,7 +15,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.StudyProject">
         <activity android:name=".ui.BaseActivity" />
-        <activity android:name=".ui.PhotosActivity">
+        <activity android:name=".ui.PhotosActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

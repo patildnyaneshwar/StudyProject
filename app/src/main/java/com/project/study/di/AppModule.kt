@@ -4,8 +4,11 @@ import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.project.study.BuildConfig
+import com.project.study.data.client.ResponseService
 import com.project.study.data.client.RetrofitDataService
+import com.project.study.data.database.PhotosDao
 import com.project.study.data.database.PhotosDatabase
+import com.project.study.data.repository.PhotosRepository
 import com.project.study.utils.ConstantUrls
 import dagger.Module
 import dagger.Provides
@@ -79,8 +82,7 @@ object AppModule {
 //    @Singleton
 //    fun providesPhotosRepository(
 //        retrofitDataService: RetrofitDataService,
-//        responseService: ResponseService,
 //        photosDao: PhotosDao
-//    ) = PhotosRepository(retrofitDataService, responseService, photosDao)
+//    ) = PhotosRepository(retrofitDataService, photosDao)
 
 }

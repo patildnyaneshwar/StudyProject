@@ -40,3 +40,5 @@ fun Context.showToast(message: String, duration: Int = Toast.LENGTH_SHORT) {
 
 inline fun <reified T : Any> T.objectToString(): String = Gson().toJson(this, T::class.java)
 inline fun <reified T : Any> String.stringToObject(): T = Gson().fromJson(this, T::class.java)
+inline fun <reified  T : Any> T.listToString(): String = Gson().toJson(this, object : TypeToken<List<T>>() {}.type)
+inline fun <reified  T : Any> String.stringToList(): List<T> = Gson().fromJson(this, object : TypeToken<List<T>>() {}.type)
