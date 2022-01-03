@@ -2,7 +2,10 @@ package com.project.study.di
 
 import android.app.Application
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.project.study.BuildConfig
 import com.project.study.data.client.ResponseService
 import com.project.study.data.client.RetrofitDataService
@@ -24,6 +27,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+    private val TAG = "AppModule"
 
 //    @Provides
 //    @Singleton
@@ -37,6 +41,8 @@ object AppModule {
         application: Application
     ) = Room.databaseBuilder(application, PhotosDatabase::class.java, "photos_database")
         .fallbackToDestructiveMigration()
+        .addMigrations(MIGRATION_1_2)
+        .addMigrations(MIGRATION_2_3)
         .build()
 
     @Provides
@@ -84,5 +90,20 @@ object AppModule {
 //        retrofitDataService: RetrofitDataService,
 //        photosDao: PhotosDao
 //    ) = PhotosRepository(retrofitDataService, photosDao)
+
+    private val MIGRATION_1_2 = object : Migration(1, 3) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            Log.d(TAG, "migrate: 1 to 3 called")
+            database.execSQL("ALTER TABLE PhotosTable ADD COLUMN created_at TEXT default 'null' NOT NULL")
+            database.execSQL("ALTER TABLE PhotosTable ADD COLUMN updated_at TEXT default 'null' NOT NULL")
+        }
+    }
+
+    private val MIGRATION_2_3 = object : Migration(2, 3) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            Log.d(TAG, "migrate: 2 to 3 called")
+            database.execSQL("ALTER TABLE PhotosTable ADD COLUMN updated_at TEXT default 'null' NOT NULL")
+        }
+    }
 
 }
